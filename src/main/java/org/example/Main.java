@@ -1,4 +1,5 @@
 package org.example;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -11,7 +12,12 @@ public class Main {
         System.out.println("Melhor distribuição:");
         for (int i = 0; i < backTracking.getMelhorDistribuicao().size(); i++) {
             int[] caminhoes = backTracking.getMelhorDistribuicao().get(i);
-            System.out.println("Caminhão " + (i + 1) + ": rotas " + Arrays.toString(caminhoes) + ". Total: " + backTracking.getTotalEmKm(caminhoes));
+            System.out.println("Caminhão " + (i + 1) + ": rotas " + Arrays.toString(caminhoes) + ". Total: "
+                    + backTracking.getTotalEmKm(caminhoes));
         }
+
+        // Chamada Divisao E Conquista
+
+        DistribuicaoRotasDivisaoConquista.distribuirRotas();
     }
 }
