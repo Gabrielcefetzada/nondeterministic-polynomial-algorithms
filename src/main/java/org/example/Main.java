@@ -26,8 +26,17 @@ public class Main {
         mediaDeExecucoes = mediaDeExecucoes / tamConjunto;
         System.out.println("Media de execuções em ms: " + mediaDeExecucoes);
          */
+
+        // DIVISAO E CONQUISTA
+        /*int NumeroVeiculos = 3;
+        List<int[]> rotas = GeradorDeProblemas.geracaoDeRotas(10, 5, 0.5);
+
+        // Chamada Divisao E Conquista
+        for (int[] arrayRotas : rotas) {
+            System.out.println("");
+            DistribuicaoRotasDivisaoConquista.distribuirRotas(arrayRotas, NumeroVeiculos);
+        }
+
+         */
     }
 }
-
-
-
