@@ -15,8 +15,8 @@ class DistribuicaoRotasDivisaoConquista {
      */
     public static void distribuirRotas() {
         Random random = new Random();
-        int tamanhoRotas = random.nextInt(41) + 10; // quantidade de rotas aleatorias de 10 a 50
-        int numCaminhoes = random.nextInt(11) + 1; // quantidade de caminhoes aleatorios de 1 a 10
+        int tamanhoRotas = random.nextInt(41) + 10;
+        int numCaminhoes = random.nextInt(11) + 1;
         System.out.println("Quantidade de rodas: " + tamanhoRotas + ", quantidade de caminhoes: " + numCaminhoes);
         int[] rotas = gerarRotas(tamanhoRotas);
         DistribuicaoRotasDivisaoConquista.distribuirRotas(rotas, numCaminhoes);
