@@ -33,6 +33,7 @@ public class GeradorDeProblemas {
         int tam_max = (int)Math.ceil(TAM_BASE * (1+dispersao));
         for(int i=0; i<tamConjunto; i++){
             int[] rotas = new int[quantRotas];
+
             for (int j = 0; j < quantRotas; j++) {
                 rotas[j] = aleatorio.nextInt(TAM_BASE, tam_max);
             }
