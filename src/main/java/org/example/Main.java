@@ -44,7 +44,7 @@ public class Main {
          * 
          */
 
-        int numCaminhoes = 3;
+        /*int numCaminhoes = 3;
         int tamanhoInicial = 6;
         int multiplicadorTamanho = 2;
 
@@ -78,7 +78,7 @@ public class Main {
             }
 
             System.out.println();
-        }
+        }*/
 
     }
 }
