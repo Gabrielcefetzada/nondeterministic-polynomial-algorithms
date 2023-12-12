@@ -7,26 +7,7 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
 
-        int tamConjunto = 1;
-        List<int[]> rotasGeradas = GeradorDeProblemas.geracaoDeRotas(10, tamConjunto,
-                0.5);
 
-        double mediaDeExecucoes = 0;
-        for (int[] array : rotasGeradas) {
-            long startTime = System.currentTimeMillis();
-
-            System.out.println(Arrays.toString(array));
-
-            DistribuicaoRotasDivisaoConquista.distribuiRotas(array, 3);
-
-            long endTime = System.currentTimeMillis();
-            long executionTime = endTime - startTime;
-
-            mediaDeExecucoes += executionTime;
-        }
-
-        mediaDeExecucoes = mediaDeExecucoes / tamConjunto;
-        System.out.println("Media de execuções em ms: " + mediaDeExecucoes);
         // BACKTRACKING
         /*
          * int tamConjunto = 10;
@@ -64,49 +45,26 @@ public class Main {
          * 
          */
 
-        /*int numCaminhoes = 3;
-        int tamanhoInicial = 6;
-        int multiplicadorTamanho = 2;
-        // int numCaminhoes = 3;
-        // int tamanhoInicial = 6;
-        // int multiplicadorTamanho = 2;
 
-        // long tempoLimite = 30000;
+        // GULOSO 1
 
-        // for (int tamanhoConjunto = tamanhoInicial;; tamanhoConjunto *=
-        // multiplicadorTamanho) {
-        // List<int[]> conjuntoDeRotas =
-        // GeradorDeProblemas.geracaoDeRotas(tamanhoConjunto, 10, 0.5);
+        // GULOSO 2
 
-        // System.out.println("Tamanho do Conjunto: " + tamanhoConjunto);
+          int tamConjunto = 1;
+          int numCaminhoes = 3;
+          List<int[]> rotasGeradas = GeradorDeProblemas.geracaoDeRotas(50, tamConjunto,
+          1);
 
-        // // Estratégia 1
-        // long startTimeEstrategia1 = System.currentTimeMillis();
-        // EstrategiaGulosa1.distribuirRotas(conjuntoDeRotas.toArray(new int[0][]),
-        // numCaminhoes);
-        // long endTimeEstrategia1 = System.currentTimeMillis();
-        // long tempoExecucaoEstrategia1 = endTimeEstrategia1 - startTimeEstrategia1;
-        // System.out.println("Tempo de Execução Estratégia 1: " +
-        // tempoExecucaoEstrategia1 + "ms");
+          for (int[] array : rotasGeradas) {
 
-        // // Estratégia 2
-        // long startTimeEstrategia2 = System.currentTimeMillis();
-        // EstrategiaGulosa2.distribuirRotas(conjuntoDeRotas.toArray(new int[0][]),
-        // numCaminhoes);
-        // long endTimeEstrategia2 = System.currentTimeMillis();
-        // long tempoExecucaoEstrategia2 = endTimeEestrategia2 - startTimeEstrategia2;
-        // System.out.println("Tempo de Execução Estratégia 2: " +
-        // tempoExecucaoEstrategia2 + "ms");
+          EstrategiaGulosa2 guloso2 = new EstrategiaGulosa2();
+          guloso2.distribuiRotasParaCaminhoes(numCaminhoes, array);
 
-        // if (tempoExecucaoEstrategia1 > tempoLimite && tempoExecucaoEstrategia2 >
-        // tempoLimite) {
-        // break;
-        // }
 
-            System.out.println();
-        }*/
-        // System.out.println();
-        // }
+          }
+
+
+
 
     }
 }

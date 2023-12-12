@@ -1,25 +1,97 @@
+package org.example;
+
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Stack;
 
 public class EstrategiaGulosa2 {
-    public static void distribuirRotas(int[][] rotas, int numCaminhoes) {
-        Arrays.sort(rotas, (a, b) -> Integer.compare(b[0], a[0]));
-
-        int[] quilometragens = new int[numCaminhoes];
-
-        for (int i = 0; i < rotas.length; i++) {
-            int indiceCaminhao = encontrarMenorQuilometragem(quilometragens);
-            quilometragens[indiceCaminhao] += rotas[i][0] * (i + 1); // Periculosidade aumenta com a ordem
-            System.out.println("Caminhão " + (indiceCaminhao + 1) + ": rota " + rotas[i][0]);
-        }
+    private ArrayList<Integer> quantidadeDeRotasParaCadaCaminhao = new ArrayList<>();
+    private Stack<Integer> pilhaDePrioridades;
+    private int[] ordenarConjuntoDeRotas(int[] conjunto) {
+        Arrays.sort(conjunto);
+        return conjunto;
     }
 
-    private static int encontrarMenorQuilometragem(int[] quilometragens) {
-        int indiceMenor = 0;
-        for (int i = 1; i < quilometragens.length; i++) {
-            if (quilometragens[i] < quilometragens[indiceMenor]) {
-                indiceMenor = i;
+    private ArrayList<Integer> defineQuantasRotasCadaCaminhaoVaiter(int numCaminhoes, int[] conjunto) {
+        int tamConjunto = conjunto.length;
+
+        int quantidadeParaCadaHomogeneo = tamConjunto / numCaminhoes;
+        int restoASerDistribuido = tamConjunto % numCaminhoes;
+
+        for(int i = 0; i < numCaminhoes; i++) {
+            quantidadeDeRotasParaCadaCaminhao.add(quantidadeParaCadaHomogeneo);
+        }
+
+        for (int j = 0; j < restoASerDistribuido; j++) {
+            quantidadeDeRotasParaCadaCaminhao.set(j, quantidadeDeRotasParaCadaCaminhao.get(j) + 1);
+        }
+
+        return quantidadeDeRotasParaCadaCaminhao;
+    }
+
+    public void distribuiRotasParaCaminhoes(int numCaminhoes, int[] conjunto) {
+        int casasPercorridas = 0;
+        ArrayList<Integer> conjuntoTransformadoEmArrayList = new ArrayList<>();
+
+        for (int elemento : conjunto) {
+            conjuntoTransformadoEmArrayList.add(elemento);
+        }
+
+        ArrayList<ArrayList<Integer>> matrizDeRotasParaCadacaminhao = new ArrayList<>();
+
+        // Inicializa a matriz com ArrayLists vazios
+        for (int i = 0; i < numCaminhoes; i++) {
+            matrizDeRotasParaCadacaminhao.add(new ArrayList<>());
+        }
+
+        // Ordena o conjunto de rotas (assumindo que você tem esse método)
+        this.ordenarConjuntoDeRotas(conjunto);
+
+        // Define quantas rotas cada caminhão terá (assumindo que você tem esse método)
+        this.defineQuantasRotasCadaCaminhaoVaiter(numCaminhoes, conjunto);
+
+        boolean devePreencherDeCimaParaBaixo = true;
+        // DISTRIBUI ROTAS
+        while (casasPercorridas < conjunto.length) {
+            if (devePreencherDeCimaParaBaixo) {
+                for (int i = 0; i < numCaminhoes; i++) {
+                    if(casasPercorridas != conjunto.length) {
+                        matrizDeRotasParaCadacaminhao.get(i).add(conjunto[casasPercorridas]);
+                    }
+                    casasPercorridas++;
+                }
+                devePreencherDeCimaParaBaixo = !devePreencherDeCimaParaBaixo;
+
+            } else {
+                for (int i = numCaminhoes - 1; i >= 0; i--) {
+                    if(casasPercorridas != conjunto.length) {
+                        matrizDeRotasParaCadacaminhao.get(i).add(conjunto[casasPercorridas]);
+                    }
+                    casasPercorridas++;
+                }
+
+                devePreencherDeCimaParaBaixo = !devePreencherDeCimaParaBaixo;
             }
         }
-        return indiceMenor;
+
+        imprimirMatriz(matrizDeRotasParaCadacaminhao);
+
     }
+
+    public void imprimirMatriz(ArrayList<ArrayList<Integer>> matriz) {
+        int numCaminhoes = matriz.size();
+
+        for (int i = 0; i < numCaminhoes; i++) {
+            System.out.print("Caminhao " + (i + 1) + ": ");
+            System.out.print(matriz.get(i));
+
+            int soma = 0;
+            for (int elemento : matriz.get(i)) {
+                soma += elemento;
+            }
+
+            System.out.println(" - " + soma + "km");
+        }
+    }
+
 }
