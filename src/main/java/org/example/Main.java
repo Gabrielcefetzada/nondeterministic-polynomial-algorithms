@@ -6,6 +6,7 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
+        // definindo o array da aula
 
         int[] arrayAula1 = { 40, 36, 38, 29, 32, 28, 31, 35, 31, 30, 32, 30, 29, 39, 35, 38, 39, 35, 32, 38, 32, 33, 29,
                 33, 29, 39, 28 };
@@ -15,24 +16,47 @@ public class Main {
         List<int[]> rotasGeradas = GeradorDeProblemas.geracaoDeRotas(10, tamConjunto,
                 0.5);
 
+        System.out.println("Executando pelo metodo divisao e conquista");
         double mediaDeExecucoes = 0;
-        for (int[] array : rotasGeradas) {
-            long startTime = System.currentTimeMillis();
+        long startTime = System.currentTimeMillis();
 
-            System.out.println(Arrays.toString(array));
+        DistribuicaoRotasDivisaoConquista.distribuiRotas(arrayAula1, 3);
+        DistribuicaoRotasDivisaoConquista.distribuiRotas(arrayAula2, 3);
 
-            DistribuicaoRotasDivisaoConquista.distribuiRotas(arrayAula1, 3);
-            DistribuicaoRotasDivisaoConquista.distribuiRotas(arrayAula2, 3);
-            // DistribuicaoRotasDivisaoConquista.distribuiRotas(array, 3);
+        long endTime = System.currentTimeMillis();
+        long executionTime = endTime - startTime;
 
-            long endTime = System.currentTimeMillis();
-            long executionTime = endTime - startTime;
-
-            mediaDeExecucoes += executionTime;
-        }
-
+        mediaDeExecucoes += executionTime;
+        // Executando backtracing
         mediaDeExecucoes = mediaDeExecucoes / tamConjunto;
         System.out.println("Media de execuções em ms: " + mediaDeExecucoes);
+        System.out.println("");
+        System.out.println("Executando pelo metodo de backtracking");
+        mediaDeExecucoes = 0;
+        startTime = System.currentTimeMillis();
+        BackTracking.gerarCombinacoes(arrayAula1);
+        BackTracking.gerarCombinacoes(arrayAula2);
+        endTime = System.currentTimeMillis();
+        executionTime = endTime - startTime;
+        mediaDeExecucoes = mediaDeExecucoes / tamConjunto;
+        System.out.println("Media de execuções em ms: " + mediaDeExecucoes);
+        System.out.println("");
+
+        // Executando guloso
+        mediaDeExecucoes = mediaDeExecucoes / tamConjunto;
+        System.out.println("Media de execuções em ms: " + mediaDeExecucoes);
+        System.out.println("");
+        System.out.println("Executando pelo metodo de backtracking");
+        mediaDeExecucoes = 0;
+        startTime = System.currentTimeMillis();
+        Guloso.distribuirRotas(arrayAula1, 3);
+        Guloso.distribuirRotas(arrayAula2, 3);
+        endTime = System.currentTimeMillis();
+        executionTime = endTime - startTime;
+        mediaDeExecucoes = mediaDeExecucoes / tamConjunto;
+        System.out.println("Media de execuções em ms: " + mediaDeExecucoes);
+        System.out.println("");
+
         // BACKTRACKING
         /*
          * int tamConjunto = 10;
