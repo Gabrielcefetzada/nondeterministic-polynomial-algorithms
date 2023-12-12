@@ -11,107 +11,90 @@ import java.util.*;
 import java.util.*;
 
 class DistribuicaoRotasDivisaoConquista {
-    /**
-     * Gera aleatoriamente um conjunto de rotas e distribui entre um número
-     * aleatório de caminhões, imprimindo os resultados.
-     */
-    public static void distribuirRotas() {
-        Random random = new Random();
-        int tamanhoRotas = random.nextInt(41) + 10;
-        int numCaminhoes = random.nextInt(11) + 1;
-        System.out.println("Quantidade de rotas: " + tamanhoRotas + ", quantidade de caminhões: " + numCaminhoes);
-        int[] rotas = gerarRotas(tamanhoRotas);
-        Map<Integer, List<Integer>> rotasPorCaminhao = distribuirRotas(rotas, numCaminhoes);
-        imprimirDistribuicao(rotasPorCaminhao);
-    }
 
-    /**
-     * Distribui as rotas entre o número especificado de caminhões e retorna um mapa
-     * representando as rotas de cada caminhão.
-     * 
-     * @param rotas        O vetor de rotas a serem distribuídas entre os caminhões.
-     * @param numCaminhoes O número de caminhões para os quais as rotas serão
-     *                     distribuídas.
-     * @return Um mapa representando as rotas de cada caminhão.
-     */
-    public static Map<Integer, List<Integer>> distribuirRotas(int[] rotas, int numCaminhoes) {
-        Arrays.sort(rotas);
-        int[] distribuicao = new int[numCaminhoes];
-        Arrays.fill(distribuicao, 0);
-        Map<Integer, List<Integer>> rotasPorCaminhao = new HashMap<>();
-
-        distribuir(rotas, rotas.length - 1, distribuicao, rotasPorCaminhao);
-        imprimirDistribuicao(rotasPorCaminhao);
-        return rotasPorCaminhao;
-    }
-
-    private static void distribuir(int[] rotas, int index, int[] distribuicao,
-            Map<Integer, List<Integer>> rotasPorCaminhao) {
-        if (index < 0)
+    public static void distribuiRotas(int[] array, int n) {
+        if (n == 0) {
             return;
+        }
+        int[] subconjunto = encontrarSubconjunto(array, n);
+        System.out.println("Caminhao " + n + Arrays.toString(subconjunto));
+        DistribuicaoRotasDivisaoConquista.distribuiRotas(removerValores(array, subconjunto), n - 1);
 
-        int minIndex = minIndex(distribuicao);
-
-        distribuicao[minIndex] += rotas[index];
-        rotasPorCaminhao.computeIfAbsent(minIndex, k -> new ArrayList<>()).add(rotas[index]);
-
-        distribuir(rotas, index - 1, distribuicao, rotasPorCaminhao);
     }
 
-    private static int minIndex(int[] distribuicao) {
-        int min = Integer.MAX_VALUE;
-        int minIndex = -1;
+    public static int[] encontrarSubconjunto(int[] array, int n) {
+        int somaTotal = 0;
+        for (int num : array) {
+            somaTotal += num;
+        }
 
-        for (int i = 0; i < distribuicao.length; i++) {
-            if (distribuicao[i] < min) {
-                min = distribuicao[i];
-                minIndex = i;
+        int tercoSomaTotal = somaTotal / n;
+
+        int[] subconjunto = divisaoConquista(array, 0, array.length - 1, tercoSomaTotal);
+
+        return subconjunto;
+    }
+
+    public static int[] divisaoConquista(int[] array, int inicio, int fim, int alvo) {
+        if (inicio > fim) {
+            return new int[0];
+        }
+
+        int meio = (inicio + fim) / 2;
+        int[] subconjuntoEsquerda = encontrarSubconjunto(array, inicio, meio, alvo);
+        int[] subconjuntoDireita = encontrarSubconjunto(array, meio + 1, fim, alvo);
+
+        int somaEsquerda = calcularSoma(subconjuntoEsquerda);
+        int somaDireita = calcularSoma(subconjuntoDireita);
+
+        if (Math.abs(somaEsquerda - alvo) < Math.abs(somaDireita - alvo)) {
+            return subconjuntoEsquerda;
+        } else {
+            return subconjuntoDireita;
+        }
+    }
+
+    public static int[] encontrarSubconjunto(int[] array, int inicio, int fim, int alvo) {
+        int[] subconjunto = new int[array.length];
+        int idx = 0;
+        for (int i = inicio; i <= fim; i++) {
+            if (array[i] <= alvo) {
+                subconjunto[idx++] = array[i];
+                alvo -= array[i];
+            }
+        }
+        return Arrays.copyOf(subconjunto, idx);
+    }
+
+    public static int calcularSoma(int[] array) {
+        int soma = 0;
+        for (int num : array) {
+            soma += num;
+        }
+        return soma;
+    }
+
+    public static int[] removerValores(int[] array, int[] valores) {
+        int[] novoArray = Arrays.copyOf(array, array.length);
+        for (int valor : valores) {
+            for (int i = 0; i < novoArray.length; i++) {
+                if (novoArray[i] == valor) {
+                    novoArray[i] = 0; // Marca o valor como zero para remoção posterior
+                    break;
+                }
             }
         }
 
-        return minIndex;
-    }
-
-    private static int[] gerarRotas(int tamanho) {
-        Random random = new Random();
-        int[] rotas = new int[tamanho];
-        for (int i = 0; i < tamanho; i++) {
-            rotas[i] = random.nextInt(41) + 10;
-        }
-        System.out.println("Rotas geradas:");
-        for (int i = 0; i < rotas.length; i++) {
-            System.out.print(rotas[i] + ", ");
-        }
-        System.out.println();
-        return rotas;
-    }
-
-    private static void imprimirDistribuicao(Map<Integer, List<Integer>> rotasPorCaminhao) {
-        for (Map.Entry<Integer, List<Integer>> entry : rotasPorCaminhao.entrySet()) {
-            int caminhao = entry.getKey();
-            List<Integer> rotas = entry.getValue();
-            System.out.println(
-                    "Caminhão " + (caminhao + 1) + ": rotas " + rotas + " - total " + calcularDistancia(rotas) + "km");
+        int countZeros = 0;
+        for (int i = 0; i < novoArray.length; i++) {
+            if (novoArray[i] == 0) {
+                countZeros++;
+            } else if (countZeros > 0) {
+                novoArray[i - countZeros] = novoArray[i];
+                novoArray[i] = 0;
+            }
         }
 
-        int distanciaMaxima = calcularDistanciaMaxima(rotasPorCaminhao);
-        System.out.println("Distância máxima percorrida: " + distanciaMaxima + "km");
-    }
-
-    private static int calcularDistancia(List<Integer> rotas) {
-        int distancia = 0;
-        for (int rota : rotas) {
-            distancia += rota;
-        }
-        return distancia;
-    }
-
-    private static int calcularDistanciaMaxima(Map<Integer, List<Integer>> rotasPorCaminhao) {
-        int distanciaMaxima = 0;
-        for (List<Integer> rotas : rotasPorCaminhao.values()) {
-            int distanciaCaminhao = calcularDistancia(rotas);
-            distanciaMaxima = Math.max(distanciaMaxima, distanciaCaminhao);
-        }
-        return distanciaMaxima;
+        return Arrays.copyOf(novoArray, novoArray.length - countZeros);
     }
 }

@@ -7,6 +7,26 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
 
+        int tamConjunto = 1;
+        List<int[]> rotasGeradas = GeradorDeProblemas.geracaoDeRotas(10, tamConjunto,
+                0.5);
+
+        double mediaDeExecucoes = 0;
+        for (int[] array : rotasGeradas) {
+            long startTime = System.currentTimeMillis();
+
+            System.out.println(Arrays.toString(array));
+
+            DistribuicaoRotasDivisaoConquista.distribuiRotas(array, 3);
+
+            long endTime = System.currentTimeMillis();
+            long executionTime = endTime - startTime;
+
+            mediaDeExecucoes += executionTime;
+        }
+
+        mediaDeExecucoes = mediaDeExecucoes / tamConjunto;
+        System.out.println("Media de execuções em ms: " + mediaDeExecucoes);
         // BACKTRACKING
         /*
          * int tamConjunto = 10;
@@ -29,25 +49,6 @@ public class Main {
          * mediaDeExecucoes = mediaDeExecucoes / tamConjunto;
          * System.out.println("Media de execuções em ms: " + mediaDeExecucoes);
          */
-
-        int tamConjunto = 10;
-        List<int[]> rotasGeradas = GeradorDeProblemas.geracaoDeRotas(1000, tamConjunto,
-                0.5);
-
-        double mediaDeExecucoes = 0;
-        for (int[] array : rotasGeradas) {
-            long startTime = System.currentTimeMillis();
-
-            DistribuicaoRotasDivisaoConquista.distribuirRotas(array, 3);
-
-            long endTime = System.currentTimeMillis();
-            long executionTime = endTime - startTime;
-
-            mediaDeExecucoes += executionTime;
-        }
-
-        mediaDeExecucoes = mediaDeExecucoes / tamConjunto;
-        System.out.println("Media de execuções em ms: " + mediaDeExecucoes);
 
         // DIVISAO E CONQUISTA
         /*
