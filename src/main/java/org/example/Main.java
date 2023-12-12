@@ -6,8 +6,53 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
+        // definindo o array da aula
 
 
+<<<<<<< HEAD
+        System.out.println("Executando pelo metodo divisao e conquista");
+        double mediaDeExecucoes = 0;
+        long startTime = System.currentTimeMillis();
+
+        DistribuicaoRotasDivisaoConquista.distribuiRotas(arrayAula1, 3);
+        DistribuicaoRotasDivisaoConquista.distribuiRotas(arrayAula2, 3);
+
+        long endTime = System.currentTimeMillis();
+        long executionTime = endTime - startTime;
+
+        mediaDeExecucoes += executionTime;
+        // Executando backtracing
+        mediaDeExecucoes = mediaDeExecucoes / tamConjunto;
+        System.out.println("Media de execuções em ms: " + mediaDeExecucoes);
+        System.out.println("");
+        System.out.println("Executando pelo metodo de backtracking");
+        mediaDeExecucoes = 0;
+        startTime = System.currentTimeMillis();
+        BackTracking.gerarCombinacoes(arrayAula1);
+        BackTracking.gerarCombinacoes(arrayAula2);
+        endTime = System.currentTimeMillis();
+        executionTime = endTime - startTime;
+        mediaDeExecucoes = mediaDeExecucoes / tamConjunto;
+        System.out.println("Media de execuções em ms: " + mediaDeExecucoes);
+        System.out.println("");
+
+        // Executando guloso
+        mediaDeExecucoes = mediaDeExecucoes / tamConjunto;
+        System.out.println("Media de execuções em ms: " + mediaDeExecucoes);
+        System.out.println("");
+        System.out.println("Executando pelo metodo de backtracking");
+        mediaDeExecucoes = 0;
+        startTime = System.currentTimeMillis();
+        Guloso.distribuirRotas(arrayAula1, 3);
+        Guloso.distribuirRotas(arrayAula2, 3);
+        endTime = System.currentTimeMillis();
+        executionTime = endTime - startTime;
+        mediaDeExecucoes = mediaDeExecucoes / tamConjunto;
+        System.out.println("Media de execuções em ms: " + mediaDeExecucoes);
+        System.out.println("");
+
+=======
+>>>>>>> cd21df1ad797653c630b73b2a590db9ab465765e
         // BACKTRACKING
         /*
          * int tamConjunto = 10;
