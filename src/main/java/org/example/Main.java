@@ -7,6 +7,10 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
 
+        int[] arrayAula1 = { 40, 36, 38, 29, 32, 28, 31, 35, 31, 30, 32, 30, 29, 39, 35, 38, 39, 35, 32, 38, 32, 33, 29,
+                33, 29, 39, 28 };
+        int[] arrayAula2 = { 32, 51, 32, 43, 42, 30, 42, 51, 43, 51, 29, 25, 27, 32, 29, 55, 43, 29, 32, 44, 55, 29, 53,
+                30, 24, 27 };
         int tamConjunto = 1;
         List<int[]> rotasGeradas = GeradorDeProblemas.geracaoDeRotas(10, tamConjunto,
                 0.5);
@@ -17,7 +21,9 @@ public class Main {
 
             System.out.println(Arrays.toString(array));
 
-            DistribuicaoRotasDivisaoConquista.distribuiRotas(array, 3);
+            DistribuicaoRotasDivisaoConquista.distribuiRotas(arrayAula1, 3);
+            DistribuicaoRotasDivisaoConquista.distribuiRotas(arrayAula2, 3);
+            // DistribuicaoRotasDivisaoConquista.distribuiRotas(array, 3);
 
             long endTime = System.currentTimeMillis();
             long executionTime = endTime - startTime;
