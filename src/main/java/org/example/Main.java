@@ -63,8 +63,12 @@ public class Main {
 
         }
 
-
-
+        // PD
+        int quantVeiculos = 3;
+        int sum = Arrays.stream(rotasGeradas.get(0)).sum();
+        boolean[][] tabela = PD.gerarTabela(rotasGeradas.get(0), rotasGeradas.get(0).length, sum / quantVeiculos);
+        List<List<Integer>> resultados = PD.melhoresResultados(tabela, rotasGeradas.get(0), quantVeiculos);
+        System.out.println("Melhores resultados: " + resultados);
 
     }
 }
