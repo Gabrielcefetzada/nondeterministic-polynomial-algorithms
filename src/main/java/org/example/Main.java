@@ -52,7 +52,7 @@ public class Main {
 
         int tamConjunto = 1;
         int numCaminhoes = 3;
-        List<int[]> rotasGeradas = GeradorDeProblemas.geracaoDeRotas(50, tamConjunto,
+        List<int[]> rotasGeradas = GeradorDeProblemas.geracaoDeRotas(11, tamConjunto,
                 1);
 
         for (int[] array : rotasGeradas) {
@@ -62,9 +62,5 @@ public class Main {
 
 
         }
-
-
-
-
     }
 }
