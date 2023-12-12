@@ -8,14 +8,8 @@ public class Main {
     public static void main(String[] args) {
         // definindo o array da aula
 
-        int[] arrayAula1 = { 40, 36, 38, 29, 32, 28, 31, 35, 31, 30, 32, 30, 29, 39, 35, 38, 39, 35, 32, 38, 32, 33, 29,
-                33, 29, 39, 28 };
-        int[] arrayAula2 = { 32, 51, 32, 43, 42, 30, 42, 51, 43, 51, 29, 25, 27, 32, 29, 55, 43, 29, 32, 44, 55, 29, 53,
-                30, 24, 27 };
-        int tamConjunto = 1;
-        List<int[]> rotasGeradas = GeradorDeProblemas.geracaoDeRotas(10, tamConjunto,
-                0.5);
 
+<<<<<<< HEAD
         System.out.println("Executando pelo metodo divisao e conquista");
         double mediaDeExecucoes = 0;
         long startTime = System.currentTimeMillis();
@@ -57,25 +51,27 @@ public class Main {
         System.out.println("Media de execuções em ms: " + mediaDeExecucoes);
         System.out.println("");
 
+=======
+>>>>>>> cd21df1ad797653c630b73b2a590db9ab465765e
         // BACKTRACKING
         /*
          * int tamConjunto = 10;
          * List<int[]> rotasGeradas = GeradorDeProblemas.geracaoDeRotas(11, tamConjunto,
          * 0.5);
-         * 
+         *
          * double mediaDeExecucoes = 0;
          * for (int[] array : rotasGeradas) {
          * long startTime = System.currentTimeMillis();
-         * 
+         *
          * BackTracking backTracking = new BackTracking();
          * backTracking.gerarCombinacoes(array);
-         * 
+         *
          * long endTime = System.currentTimeMillis();
          * long executionTime = endTime - startTime;
-         * 
+         *
          * mediaDeExecucoes += executionTime;
          * }
-         * 
+         *
          * mediaDeExecucoes = mediaDeExecucoes / tamConjunto;
          * System.out.println("Media de execuções em ms: " + mediaDeExecucoes);
          */
@@ -84,54 +80,36 @@ public class Main {
         /*
          * int NumeroVeiculos = 3;
          * List<int[]> rotas = GeradorDeProblemas.geracaoDeRotas(10, 5, 0.5);
-         * 
+         *
          * // Chamada Divisao E Conquista
          * for (int[] arrayRotas : rotas) {
          * System.out.println("");
          * DistribuicaoRotasDivisaoConquista.distribuirRotas(arrayRotas,
          * NumeroVeiculos);
          * }
-         * 
+         *
          */
 
-        // int numCaminhoes = 3;
-        // int tamanhoInicial = 6;
-        // int multiplicadorTamanho = 2;
 
-        // long tempoLimite = 30000;
+        // GULOSO 1
 
-        // for (int tamanhoConjunto = tamanhoInicial;; tamanhoConjunto *=
-        // multiplicadorTamanho) {
-        // List<int[]> conjuntoDeRotas =
-        // GeradorDeProblemas.geracaoDeRotas(tamanhoConjunto, 10, 0.5);
+        // GULOSO 2
 
-        // System.out.println("Tamanho do Conjunto: " + tamanhoConjunto);
+        int tamConjunto = 1;
+        int numCaminhoes = 3;
+        List<int[]> rotasGeradas = GeradorDeProblemas.geracaoDeRotas(50, tamConjunto,
+                1);
 
-        // // Estratégia 1
-        // long startTimeEstrategia1 = System.currentTimeMillis();
-        // EstrategiaGulosa1.distribuirRotas(conjuntoDeRotas.toArray(new int[0][]),
-        // numCaminhoes);
-        // long endTimeEstrategia1 = System.currentTimeMillis();
-        // long tempoExecucaoEstrategia1 = endTimeEstrategia1 - startTimeEstrategia1;
-        // System.out.println("Tempo de Execução Estratégia 1: " +
-        // tempoExecucaoEstrategia1 + "ms");
+        for (int[] array : rotasGeradas) {
 
-        // // Estratégia 2
-        // long startTimeEstrategia2 = System.currentTimeMillis();
-        // EstrategiaGulosa2.distribuirRotas(conjuntoDeRotas.toArray(new int[0][]),
-        // numCaminhoes);
-        // long endTimeEstrategia2 = System.currentTimeMillis();
-        // long tempoExecucaoEstrategia2 = endTimeEestrategia2 - startTimeEstrategia2;
-        // System.out.println("Tempo de Execução Estratégia 2: " +
-        // tempoExecucaoEstrategia2 + "ms");
+            EstrategiaGulosa2 guloso2 = new EstrategiaGulosa2();
+            guloso2.distribuiRotasParaCaminhoes(numCaminhoes, array);
 
-        // if (tempoExecucaoEstrategia1 > tempoLimite && tempoExecucaoEstrategia2 >
-        // tempoLimite) {
-        // break;
-        // }
 
-        // System.out.println();
-        // }
+        }
+
+
+
 
     }
 }

@@ -56,7 +56,7 @@ public class teste {
         return juntarArrays(array1, array2);
     }
 
-    public static void main(String[] args) {
+   /* public static void main(String[] args) {
         int[] array = { 3, 5, 7, 2, 6, 4 };
         int target = 12;
         int margemErroUnidades = 2;
@@ -65,5 +65,5 @@ public class teste {
 
         System.out.println("Array resultante:");
         System.out.println(Arrays.toString());
-    }
+    }*/
 }
