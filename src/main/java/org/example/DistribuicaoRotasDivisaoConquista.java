@@ -12,12 +12,23 @@ import java.util.*;
 
 class DistribuicaoRotasDivisaoConquista {
 
+    /**
+     * Chamada para distribuir rotas por divisao e conquista. Printa na tela o
+     * resultado, e a soma total
+     * 
+     * @param array o vetor de rotas para serem distribuidos
+     * @param n     o numero de veiculos para os quais serao distribuidos
+     */
     public static void distribuiRotas(int[] array, int n) {
         if (n == 0) {
             return;
         }
         int[] subconjunto = encontrarSubconjunto(array, n);
-        System.out.println("Caminhao " + n + Arrays.toString(subconjunto));
+        int somaTotal = 0;
+        for (int num : array) {
+            somaTotal += num;
+        }
+        System.out.println("Caminhao " + n + Arrays.toString(subconjunto) + " " + somaTotal);
         DistribuicaoRotasDivisaoConquista.distribuiRotas(removerValores(array, subconjunto), n - 1);
 
     }
