@@ -51,16 +51,39 @@ public class Main {
                     break;
                 case 2:
 
-        for (int[] array : rotasGeradas) {
+                    for (int[] array : rotasGeradas) {
+                        EstrategiaGulosa1 estrategiaGulosa1 = new EstrategiaGulosa1();
+                        estrategiaGulosa1.distribuirRotas(array, numCaminhoes);
+                    }
 
-            EstrategiaGulosa2 guloso2 = new EstrategiaGulosa2();
-            guloso2.distribuiRotasParaCaminhoes(numCaminhoes, array);
+                    break;
+                case 3:
 
+                    for (int[] array : rotasGeradas) {
+                        EstrategiaGulosa2 guloso2 = new EstrategiaGulosa2();
+                        guloso2.distribuiRotasParaCaminhoes(numCaminhoes, array);
+                    }
 
+                    break;
+                case 4:
+
+                    for (int[] array : rotasGeradas) {
+                        DistribuicaoRotasDivisaoConquista.distribuiRotas(array, numCaminhoes);
+                    }
+
+                    break;
+                case 5:
+                    System.out.println("Método ainda nao implementado");
+                    break;
+
+                case 6:
+                    System.out.println("Saindo...");
+                    continua = false;
+                    break;
+
+                default:
+                    System.out.println("Esta não é uma opção válida!");
+            }
         }
-
-
-
-
     }
 }
