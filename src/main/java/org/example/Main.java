@@ -39,7 +39,8 @@ public class Main {
             System.out.println("6 - Sair");
             opcao = scanner.nextInt();
 
-
+            double mediaDeExecucoes = 0;
+            long startTime = System.currentTimeMillis();
             switch (opcao) {
                 case 1:
 
@@ -84,6 +85,13 @@ public class Main {
                 default:
                     System.out.println("Esta não é uma opção válida!");
             }
+
+            long endTime = System.currentTimeMillis();
+            long executionTime = endTime - startTime;
+
+            mediaDeExecucoes += executionTime;
+
+            System.out.println("Media de execuções em ms: " + mediaDeExecucoes);
         }
     }
 }
