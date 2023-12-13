@@ -23,8 +23,9 @@ public class PD {
     //    Caminhão 3: rotas 23, 34, 21 – total 78km”
     // resolva o problema usando programacao dinamica
 
-    static boolean[][] gerarTabela(int[] rotas, int n, int sum)
-    {
+    static boolean[][] gerarTabela(int[] rotas, int n, int quantVeiculos) {
+        int sum = Arrays.stream(rotas).sum() / quantVeiculos;
+
         // The value of subset[i][j] will be
         // true if there is a subset of
         // set[0..j-1] with sum equal to i
