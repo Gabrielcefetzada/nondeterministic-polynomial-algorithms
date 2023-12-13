@@ -15,7 +15,7 @@ class DistribuicaoRotasDivisaoConquista {
     public static void distribuiRotas(int[] array, int numCaminhoes) {
         if (numCaminhoes == 1) {
             System.out.println("Caminhao " + numCaminhoes + " " +
-                    Arrays.toString(array));
+                    Arrays.toString(array) + " " + Arrays.stream(array).sum());
             return;
         }
 
@@ -24,7 +24,7 @@ class DistribuicaoRotasDivisaoConquista {
         int[] aux = Arrays.stream(distribuir(array, soma / numCaminhoes, 10))
                 .filter(num -> num != 0)
                 .toArray();
-        System.out.println("Caminhao " + numCaminhoes + " " + Arrays.toString(aux));
+        System.out.println("Caminhao " + numCaminhoes + " " + Arrays.toString(aux) + " " + Arrays.stream(aux).sum());
 
         distribuiRotas(removerElementos(array, aux), numCaminhoes - 1);
     }

@@ -44,10 +44,7 @@ public class EstrategiaGulosa2 {
             matrizDeRotasParaCadacaminhao.add(new ArrayList<>());
         }
 
-        // Ordena o conjunto de rotas (assumindo que você tem esse método)
         this.ordenarConjuntoDeRotas(conjunto);
-
-        // Define quantas rotas cada caminhão terá (assumindo que você tem esse método)
         this.defineQuantasRotasCadaCaminhaoVaiter(numCaminhoes, conjunto);
 
         boolean devePreencherDeCimaParaBaixo = true;
@@ -57,8 +54,8 @@ public class EstrategiaGulosa2 {
                 for (int i = 0; i < numCaminhoes; i++) {
                     if(casasPercorridas != conjunto.length) {
                         matrizDeRotasParaCadacaminhao.get(i).add(conjunto[casasPercorridas]);
+                        casasPercorridas++;
                     }
-                    casasPercorridas++;
                 }
                 devePreencherDeCimaParaBaixo = !devePreencherDeCimaParaBaixo;
 
@@ -66,8 +63,8 @@ public class EstrategiaGulosa2 {
                 for (int i = numCaminhoes - 1; i >= 0; i--) {
                     if(casasPercorridas != conjunto.length) {
                         matrizDeRotasParaCadacaminhao.get(i).add(conjunto[casasPercorridas]);
+                        casasPercorridas++;
                     }
-                    casasPercorridas++;
                 }
 
                 devePreencherDeCimaParaBaixo = !devePreencherDeCimaParaBaixo;
