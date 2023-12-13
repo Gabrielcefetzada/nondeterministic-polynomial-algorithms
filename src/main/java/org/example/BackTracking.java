@@ -7,10 +7,10 @@ import java.util.List;
 
 public class BackTracking {
 
-    private static SubConjunto melhorDistribuicao = null;
-    private static double melhorMediaGlobal = 0;
+    private SubConjunto melhorDistribuicao = null;
+    private double melhorMediaGlobal = 0;
 
-    public static void gerarCombinacoes(int[] conjunto) {
+    public void gerarCombinacoes(int[] conjunto) {
         int n = conjunto.length;
         boolean[] usado = new boolean[n];
         List<Integer> caminhao1 = new ArrayList<>();
@@ -22,7 +22,7 @@ public class BackTracking {
         System.out.println("Melhor distribuicao: " + melhorDistribuicao);
     }
 
-    private static void backtrack(int[] conjunto, boolean[] usado, List<Integer> caminhao1, List<Integer> caminhao2, List<Integer> caminhao3) {
+    private void backtrack(int[] conjunto, boolean[] usado, List<Integer> caminhao1, List<Integer> caminhao2, List<Integer> caminhao3) {
         if (caminhao1.size() + caminhao2.size() + caminhao3.size() == conjunto.length) {
             // Calcular médias
             double mediaCaminhao1 = calcularMedia(caminhao1);
@@ -71,7 +71,7 @@ public class BackTracking {
         }
     }
 
-    private static double calcularMedia(List<Integer> caminhao) {
+    private double calcularMedia(List<Integer> caminhao) {
         if (caminhao.isEmpty()) {
             return 0;
         }
@@ -83,7 +83,7 @@ public class BackTracking {
         return (double) soma / caminhao.size();
     }
 
-    private static double obtermediaLocal(double a, double b, double c) {
+    private double obtermediaLocal(double a, double b, double c) {
         if (a == 100) {
             return (c + b) / 2;
         } else if (b == 100) {
@@ -95,7 +95,7 @@ public class BackTracking {
         return (a + b + c) / 3;
     }
 
-    private static int somarElementos(List<Integer> lista) {
+    private int somarElementos(List<Integer> lista) {
         return lista.stream().mapToInt(Integer::intValue).sum();
     }
 }
