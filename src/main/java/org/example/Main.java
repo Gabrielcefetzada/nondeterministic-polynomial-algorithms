@@ -7,68 +7,115 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
 
+        Scanner scanner = new Scanner(System.in);
 
-        // BACKTRACKING
-        /*
-         * int tamConjunto = 10;
-         * List<int[]> rotasGeradas = GeradorDeProblemas.geracaoDeRotas(11, tamConjunto,
-         * 0.5);
-         *
-         * double mediaDeExecucoes = 0;
-         * for (int[] array : rotasGeradas) {
-         * long startTime = System.currentTimeMillis();
-         *
-         * BackTracking backTracking = new BackTracking();
-         * backTracking.gerarCombinacoes(array);
-         *
-         * long endTime = System.currentTimeMillis();
-         * long executionTime = endTime - startTime;
-         *
-         * mediaDeExecucoes += executionTime;
-         * }
-         *
-         * mediaDeExecucoes = mediaDeExecucoes / tamConjunto;
-         * System.out.println("Media de execuções em ms: " + mediaDeExecucoes);
-         */
+        int numCaminhoes, numRotas, tamanhoConjunto, opcao;
+        double dispersao;
+        boolean continua = true;
+        long startTime = 0;
+        long endTime = 0;
+        long executionTime =0;
+        double mediaDeExecucoes = 0;
 
-        // DIVISAO E CONQUISTA
-        /*
-         * int NumeroVeiculos = 3;
-         * List<int[]> rotas = GeradorDeProblemas.geracaoDeRotas(10, 5, 0.5);
-         *
-         * // Chamada Divisao E Conquista
-         * for (int[] arrayRotas : rotas) {
-         * System.out.println("");
-         * DistribuicaoRotasDivisaoConquista.distribuirRotas(arrayRotas,
-         * NumeroVeiculos);
-         * }
-         *
-         */
+        System.out.println("Digite o número de caminhões");
+        numCaminhoes = scanner.nextInt();
+
+        System.out.println("Digite o número de rotas");
+        numRotas = scanner.nextInt();
+
+        System.out.println("Digite a dispersao");
+        dispersao = scanner.nextDouble();
+
+        System.out.println("Digite o tamanho do conjunto");
+        tamanhoConjunto = scanner.nextInt();
+
+        List<int[]> rotasGeradas = GeradorDeProblemas.geracaoDeRotas(numRotas, tamanhoConjunto, dispersao);
+
+        while (continua) {
+
+            System.out.println();
+            System.out.println("Escolha qual algoritmo deseja utilizar. Basta digitar o seu número");
+            System.out.println("1 - Backtracking");
+            System.out.println("2 - Algoritmo Guloso 1");
+            System.out.println("3 - Algoritmo Guloso 2");
+            System.out.println("4 - Divisão e conquista");
+            System.out.println("5 - Programação Dinamica");
+            System.out.println("6 - Sair");
+            opcao = scanner.nextInt();
+
+            switch (opcao) {
+                case 1:
+                    startTime = System.currentTimeMillis();
+
+                    for (int[] array : rotasGeradas) {
+                        BackTracking backTracking = new BackTracking();
+                        backTracking.gerarCombinacoes(array);
+                    }
+
+                    endTime = System.currentTimeMillis();
+                    executionTime = endTime - startTime;
+                    mediaDeExecucoes += executionTime;
+
+                    break;
+                case 2:
+                    startTime = System.currentTimeMillis();
+
+                    for (int[] array : rotasGeradas) {
+                        EstrategiaGulosa1 estrategiaGulosa1 = new EstrategiaGulosa1();
+                        estrategiaGulosa1.distribuirRotas(array, numCaminhoes);
+                    }
+
+                    endTime = System.currentTimeMillis();
+                    executionTime = endTime - startTime;
+                    mediaDeExecucoes += executionTime;
+
+                    break;
+                case 3:
+                    startTime = System.currentTimeMillis();
+
+                    for (int[] array : rotasGeradas) {
+                        EstrategiaGulosa2 guloso2 = new EstrategiaGulosa2();
+                        guloso2.distribuiRotasParaCaminhoes(numCaminhoes, array);
+                    }
+
+                    endTime = System.currentTimeMillis();
+                    executionTime = endTime - startTime;
+                    mediaDeExecucoes += executionTime;
+
+                    break;
+                case 4:
+                    startTime = System.currentTimeMillis();
+
+                    for (int[] array : rotasGeradas) {
+                        DistribuicaoRotasDivisaoConquista.distribuiRotas(array, numCaminhoes);
+                    }
+
+                    endTime = System.currentTimeMillis();
+                    executionTime = endTime - startTime;
+                    mediaDeExecucoes += executionTime;
+
+                    break;
+                case 5:
+                    startTime = System.currentTimeMillis();
+
+                    System.out.println("Método ainda nao implementado");
+
+                    endTime = System.currentTimeMillis();
+                    executionTime = endTime - startTime;
+                    mediaDeExecucoes += executionTime;
+                    break;
+
+                case 6:
+                    System.out.println("Saindo...");
+                    continua = false;
+                    break;
+
+                default:
+                    System.out.println("Esta não é uma opção válida!");
+            }
 
 
-        // GULOSO 1
-
-        // GULOSO 2
-
-        int tamConjunto = 1;
-        int numCaminhoes = 3;
-        List<int[]> rotasGeradas = GeradorDeProblemas.geracaoDeRotas(50, tamConjunto,
-                1);
-
-        for (int[] array : rotasGeradas) {
-
-            EstrategiaGulosa2 guloso2 = new EstrategiaGulosa2();
-            guloso2.distribuiRotasParaCaminhoes(numCaminhoes, array);
-
-
+            System.out.println("Media de execuções em ms: " + mediaDeExecucoes/tamanhoConjunto);
         }
-
-        // PD
-        int quantVeiculos = 3;
-        int sum = Arrays.stream(rotasGeradas.get(0)).sum();
-        boolean[][] tabela = PD.gerarTabela(rotasGeradas.get(0), rotasGeradas.get(0).length, sum / quantVeiculos);
-        List<List<Integer>> resultados = PD.melhoresResultados(tabela, rotasGeradas.get(0), quantVeiculos);
-        System.out.println("Melhores resultados: " + resultados);
-
     }
 }
