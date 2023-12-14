@@ -26,22 +26,14 @@ public class PD {
     static boolean[][] gerarTabela(int[] rotas, int n, int quantVeiculos) {
         int sum = Arrays.stream(rotas).sum() / quantVeiculos;
 
-        // The value of subset[i][j] will be
-        // true if there is a subset of
-        // set[0..j-1] with sum equal to i
         boolean[][] subset = new boolean[sum + 1][n + 1];
 
-        // If sum is 0, then answer is true
         for (int i = 0; i <= n; i++)
             subset[0][i] = true;
 
-        // If sum is not 0 and set is empty,
-        // then answer is false
         for (int i = 1; i <= sum; i++)
             subset[i][0] = false;
 
-        // Fill the subset table in bottom
-        // up manner
         for (int i = 1; i <= sum; i++) {
             for (int j = 1; j <= n; j++) {
                 subset[i][j] = subset[i][j - 1];
@@ -57,19 +49,22 @@ public class PD {
 
     static List<List<Integer>> melhoresResultados(boolean[][] tabela, int[] rotas, int quantVeiculos) {
         List<List<Integer>> resultados = new ArrayList<>();
-        int index = 0;
-        for (int i = tabela.length - 1; i > 0; i--) {
-            resultados.add(new ArrayList<>());
-            for (int j = tabela[0].length - 1; j > 0; j--) {
-                if (!tabela[i][j]) continue;
 
-                if (resultados.get(index).size() < quantVeiculos) {
-                    resultados.get(index).add(rotas[j - 1]);
-                } else {
-                    index++;
-                    resultados.add(new ArrayList<>());
-                    resultados.get(index).add(rotas[j - 1]);
-                }
+        int row = tabela.length - 1;
+        int col = tabela[0].length - 1;
+        int index = 0;
+
+        for (int i = 0; i < quantVeiculos; i++) {
+            resultados.add(new ArrayList<>());
+        }
+
+        while (row > 0 && col > 0) {
+            if (tabela[row][col] == tabela[row][col - 1]) {
+                col--;
+            } else if (tabela[row][col]) {
+                resultados.get(index).add(rotas[col - 1]);
+                row -= rotas[col - 1];
+                col--;
             }
         }
 
