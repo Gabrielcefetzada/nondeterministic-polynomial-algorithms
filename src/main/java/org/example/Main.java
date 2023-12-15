@@ -98,7 +98,9 @@ public class Main {
                 case 5:
                     startTime = System.currentTimeMillis();
 
-                    System.out.println("Método ainda nao implementado");
+                    System.out.println("Algoritmo incompleto");
+
+                    //PD.melhoresResultados(rotasGeradas, numCaminhoes, 0);
 
                     endTime = System.currentTimeMillis();
                     executionTime = endTime - startTime;
