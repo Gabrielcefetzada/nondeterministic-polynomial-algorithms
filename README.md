@@ -46,19 +46,6 @@ c1) Neste caso, utilize os mesmos conjuntos de tamanho T utilizados no backtrack
 d) Projetar e implementar uma solução para o problema apresentado utilizando programação
 dinâmica. O grupo deve decidir se vai utilizar o método demonstrado em aula ou outro à escolha.
 d1) Aqui, utilize os mesmos conjuntos de teste do algoritmo guloso
-
-e) Criar um relatório técnico sobre as implementações. Este relatório deve conter (i) as explicações
-sobre as decisões tomadas e o funcionamento de cada algoritmo implementado e (ii) a comparação
-de resultados obtidos pelas implementações. Esta comparação deve se dar tanto em relação ao
-tempo de execução como em relação à qualidade do resultado. Evite fazer comparações rasas ou
-simplesmente demonstrar números. O trabalho pressupõe considerações acerca do problema, das
-técnicas utilizadas, dos resultados esperados e obtidos.
-Observações:
-• Grupos de 4 alunos. Caso um grupo tenha menos alunos, estará sujeito à alocação de alunos
-para completar as vagas por parte do professor;
-• Os trabalhos serão apresentados ao professor, podendo incluir uma apresentação gravada de
-vídeo, na aula da disciplina seguinte à prova 2;
-• O grupo pode optar por uma de duas formas de avaliação:
 o “Todo mundo fez tudo” e assim a nota será atribuída igualmente para todos
 o Explicar a divisão das tarefas entre os membros do grupo no relatório e na
 apresentação. Neste caso, o grupo será avaliado pelo item ‘e’ e cada um terá uma nota
